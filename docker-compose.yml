@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  top:
+    image: tensorflow/tensorflow:latest-gpu-jupyter
+    ports:
+      - 8888:8888
+    volumes:
+      - type: bind
+        #source: /home/eric/repos/gpu_env_test/nn4topopt/
+        source: .
+        target: /tf/sketch_rnn/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
